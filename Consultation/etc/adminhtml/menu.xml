@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Perspective_Consultation::view" title="Consultation" module="Perspective_Consultation" sortOrder="50" resource="Perspective_Consultation::view"/>
+        <add id="Perspective_Consultation::menu" title="Consultation Grid" module="Perspective_Consultation" sortOrder="20" parent="Perspective_Consultation::view" action="cons/index/index" resource="Perspective_Consultation::menu"/>
+    </menu>
+</config>

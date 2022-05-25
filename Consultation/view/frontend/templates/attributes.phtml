@@ -1,0 +1,46 @@
+
+<button id="information-btn">More information</button>
+    <div id="information-content">
+        <h2>More information</h2>
+        <?php
+            $_helper = $this->helper(Magento\Catalog\Helper\Output::class);
+            $_product = $block->getProduct();
+        ?>
+        <?php if ($_additional = $block->getAdditionalData()) :?>
+            <div class="additional-attributes-wrapper table-wrapper">
+                <table class="data table additional-attributes" id="product-attribute-specs-table">
+                    <caption class="table-caption"><?= $block->escapeHtml(__('More Information')) ?></caption>
+                    <tbody>
+                    <?php foreach ($_additional as $_data) :?>
+                        <tr>
+                            <th class="col label" scope="row"><?= $block->escapeHtml($_data['label']) ?></th>
+                            <td class="col data" data-th="<?= $block->escapeHtmlAttr($_data['label']) ?>"><?= /* @noEscape */ $_helper->productAttribute($_product, $_data['value'], $_data['code']) ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        <?php endif;?>
+    </div>
+
+<script type="text/javascript">
+    require(["jquery", "Magento_Ui/js/modal/modal"],function($, modal) {
+        var options = {
+            type: 'popup',
+            responsive: true,
+            buttons: [{
+                text: $.mage.__('Dismiss & Continue'),
+                class: '',
+                click: function () {
+                    this.closeModal();
+                }
+            }]
+        };
+
+        var popup = modal(options, $('#information-content'));
+        $("#information-btn").click(function() {
+            $('#information-content').modal('openModal');
+        });
+    });
+</script>
+

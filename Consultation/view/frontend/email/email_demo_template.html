@@ -1,0 +1,25 @@
+{{template config_path="design/email/header_template"}}
+<table>
+    <tr>
+        <th>{{trans "Dear, %name." name = $name}}</th>
+    </tr>
+    <tr>
+        <td>{{trans "Question: %comment" comment = $comment}}</td>
+    </tr>
+    <tr>
+        <td>{{trans "Answer: %answer" answer = $answer}}</td>
+    </tr>
+    <tr>
+        <td>{{trans "Answer date: %answerDate" answerDate = $answerDate}}</td>
+    </tr>
+    <tr>
+        <td>{{trans "Thanks for contacting"}}</td>
+    </tr>
+    <tr>
+        <td>{{trans "(Name)"}}</td>
+    </tr>
+    <tr>
+        <td>{{trans "(Company Name)"}}</td>
+    </tr>
+</table>
+{{template config_path="design/email/footer_template"}}

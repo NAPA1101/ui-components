@@ -1,0 +1,78 @@
+<button id="modal-btn">Seller's advice</button>
+    <div id="modal-content">
+        <div class="modal-inner-content">
+            <h2>Form for consultation</h2>
+                <form class="form contact"
+                      action="<?= $block->getBaseUrl(). 'consultation/index/save' ?>"
+                      id="contact-form"
+                      method="post"
+                      data-hasrequired="<?= $block->escapeHtmlAttr(__('* Required Fields')) ?>"
+                      data-mage-init='{"validation":{}}'>
+                    <fieldset class="fieldset">
+                        <div class="field note no-label"><?= $block->escapeHtml(__('Jot us a note and we’ll get back to you as quickly as possible.')) ?></div>
+                        <div class="field name required">
+                            <label class="label" for="name"><span><?= $block->escapeHtml(__('Name')) ?></span></label>
+                            <div class="control">
+                                <input name="name" id="name" title="<?= $block->escapeHtmlAttr(__('Name')) ?>" value="<?= $block->escapeHtmlAttr($this->helper('Magento\Contact\Helper\Data')->getPostValue('name') ?: $this->helper('Magento\Contact\Helper\Data')->getUserName()) ?>" class="input-text" type="text" data-validate="{required:true, 'maxlength':15}"/>
+                            </div>
+                        </div>
+                        <div class="field email">
+                            <label class="label" for="email"><span><?= $block->escapeHtml(__('Email')) ?></span></label>
+                            <div class="control">
+                                <input name="email" id="email" title="<?= $block->escapeHtmlAttr(__('Email')) ?>" value="<?= $block->escapeHtmlAttr($this->helper('Magento\Contact\Helper\Data')->getPostValue('email') ?: $this->helper('Magento\Contact\Helper\Data')->getUserEmail()) ?>" class="input-text" type="email" data-validate="{'validate-email':true}" pattern="[a-zA-Z0-9-_.]{7,}"/>
+                            </div>
+                        </div>
+                        <!-- Custom field -->
+                        <div class="field subject required">
+                            <label class="label" for="subject"><span><?= $block->escapeHtml(__('Subject')) ?></span></label>
+                            <div class="control">
+                                <input name="subject" id="subject" title="<?= $block->escapeHtml(__('Subject')) ?>" value="" class="input-text" type="text" data-validate="{required:true}"/>
+                            </div>
+                        </div>
+                        <!-- Custom field -->
+                        <div class="field telephone required">
+                            <label class="label" for="telephone"><span><?= $block->escapeHtml(__('Phone Number')) ?></span></label>
+                            <div class="control">
+                                <input name="telephone" id="telephone" title="<?= $block->escapeHtmlAttr(__('Phone Number')) ?>" value="<?= $block->escapeHtmlAttr($this->helper('Magento\Contact\Helper\Data')->getPostValue('telephone')) ?>" class="input-text" type="tel" data-validate="{required:true}" pattern="[+](380) (97|96|68|50|95) [0-9]{3}-[0-9]{2}-[0-9]{2}" placeholder="+380 XX XXX-XX-XX">
+                            </div>
+                        </div>
+                        <div class="field comment required">
+                            <label class="label" for="comment"><span><?= $block->escapeHtml(__('What’s on your mind?')) ?></span></label>
+                            <div class="control">
+                                <textarea name="comment" id="comment" title="<?= $block->escapeHtmlAttr(__('What’s on your mind?')) ?>" class="input-text" cols="5" rows="3" data-validate="{required:true}"><?= $block->escapeHtml($this->helper('Magento\Contact\Helper\Data')->getPostValue('comment')) ?></textarea>
+                            </div>
+                        </div>
+                        <?= $block->getChildHtml('form.additional.info') ?>
+                    </fieldset>
+                    <div class="actions-toolbar">
+                        <div class="primary">
+                            <input type="hidden" name="hideit" id="hideit" value="" />
+                            <button type="submit" title="<?= $block->escapeHtmlAttr(__('Submit')) ?>" class="action submit primary">
+                                <span><?= $block->escapeHtml(__('Submit')) ?></span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+        </div>
+    </div>
+<script type="text/javascript">
+    require(["jquery", "Magento_Ui/js/modal/modal"],function($, modal) {
+        var options = {
+            type: 'popup',
+            responsive: true,
+            buttons: [{
+                text: $.mage.__('Dismiss & Continue'),
+                class: '',
+                click: function () {
+                    this.closeModal();
+                }
+            }]
+        };
+
+        var popup = modal(options, $('#modal-content'));
+        $("#modal-btn").click(function() {
+            $('#modal-content').modal('openModal');
+        });
+    });
+</script>
+
